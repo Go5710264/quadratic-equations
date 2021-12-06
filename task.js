@@ -14,11 +14,15 @@ function solveEquation(a, b, c) {
   }
   return arr; // array
 }
-/*
+
+// 5,5 500000 5000000 01.01.2027 60months
+
 function calculateTotalMortgage(percent, contribution, amount, date) {
-  let totalAmount;
+  let totalAmount; //Итого
+  let ante = percent * 0.12; // 1/12 процентной ставки !!!
 
-  // код для задачи №2 писать здесь
+  let payment = amount * (ante + (ante / (((1 + ante) ** 60) - 1))); // ежемесечная оплата
 
+  
   return totalAmount;
-}*/
+}
