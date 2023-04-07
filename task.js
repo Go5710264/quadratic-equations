@@ -10,30 +10,29 @@ function solveEquation(a, b, c) {
 	  let x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
 	  arr.push(x1, x2);
   };
-  return arr; // array
+  return arr;
 }
 
-
-function examination(percent, contribution, amount) {
-  percent.toFixed(2);
-  contribution.toFixed(2);
-  amount.toFixed(2);
-  Number.isNaN(percent);
-  Number.isNaN(contribution);
-  Number.isNaN(amount);
-  parseInt(percent)
-}
+// Калькулятор для расчёта выплат по ипотеке:
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-  let ante = percent * 0.12; // 1/12 процентной ставки !!!
+  
+  if (isNaN(percent)) {
+    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`
+  } else if (isNaN(contribution)) {
+    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`
+  } else if (isNaN(amount)) {
+    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`
+  }
+   
+  const interestRate = (percent / 100) / 12;
+  const loanBody = amount - contribution;
  
-  let currentMonth = new Date(window.date.value).getMonth();
-  let currentYear = new Date(window.date.value).getFullYear();
-  let numberMounths = currentYear * 12 - currentMonth + Date().getMonth();
-  let payment = amount * (ante + (ante / (((1 + ante) ** numberMounths) - 1))); // ежемесячная оплата
-  let totalAmount = numberMounths * payment; //Итого, общая сумма ипотеки
-  let returnBank = totalAmount - contribution; // п.3 вернуть банку
+  const monthlyPayment = loanBody * (interestRate + (interestRate / (((1 + interestRate) ** date) - 1)));
+  
+  const totalAmount = (monthlyPayment * date).toFixed(2);
+  
+  return Number(totalAmount);
 
-  return totalAmount;
 }
 
